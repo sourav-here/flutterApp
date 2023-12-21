@@ -4,7 +4,6 @@ import 'LoginScreen.dart';
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Simulate some initialization process
     Future.delayed(Duration(seconds: 4), () {
       Navigator.pushReplacement(
         context,
@@ -17,7 +16,6 @@ class SplashScreen extends StatelessWidget {
       body: Center(
         child: Image.asset('assets/image/logo.png'),
         // FlutterLogo(size: 150),
-
       ),
     );
   }

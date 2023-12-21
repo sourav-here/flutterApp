@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'LoginScreen.dart';
 
-
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +49,12 @@ class HomePage extends StatelessWidget {
   }
 }
 
-Widget ListItem (String message){
+Widget ListItem(String message) {
   return Card(
-    child: SizedBox(height :80 ,
+    child: SizedBox(
+        height: 80,
         child: Center(
-            child: Text(message,style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold)))),
+            child: Text(message,
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)))),
   );
 }

@@ -3,10 +3,39 @@ import 'HomeScreen.dart';
 
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final String _validUsername = "sourav";
-  final String _validPassword = "123";
-  // TextEditingController _usernameController = TextEditingController();
-  // TextEditingController _passwordController = TextEditingController();
+  // final String _validUsername = "sourav";
+  // final String _validPassword = "123";
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  void login(BuildContext context) {
+    final _validUsername = _usernameController.text;
+    final _validPassword = _passwordController.text;
+
+    if (_validUsername == 'sourav' && _validPassword == '123') {
+      Navigator.of(context as BuildContext).pushReplacement(
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      final message = "Incorrect Credentials";
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text(message),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK'),
+                )
+              ],
+            );
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +66,9 @@ class LoginScreen extends StatelessWidget {
 
                 TextFormField(
                   style: TextStyle(color: Colors.white),
-                  // controller: _usernameController,
+                  controller: _usernameController,
                   decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
                       border: new OutlineInputBorder(
                         borderSide: new BorderSide(
                             width: 10, color: Colors.lightGreenAccent),
@@ -59,34 +89,35 @@ class LoginScreen extends StatelessWidget {
                   //     return null;
                   //   }
                   // },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
+                  validator: (_usernameController) {
+                    if (_usernameController == null ||
+                        _usernameController.isEmpty) {
                       return 'Please enter a username';
-                    } else if (value != _validUsername) {
-                       return 'Invalid username';
+                    } else if (_usernameController != _usernameController) {
+                      return 'Invalid username';
                     }
-                    
-                    else{
 
-                      showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text('Incorrect Credentials'),
-                              content: Text(
-                                  'Please enter correct password.'),
-                              actions: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            ),
-                          );
+                    // else{
 
-                    }
-                      //
+                    //   showDialog(
+                    //         context: context,
+                    //         builder: (context) => AlertDialog(
+                    //           title: Text('Incorrect Credentials'),
+                    //           content: Text(
+                    //               'Please enter correct password.'),
+                    //           actions: [
+                    //             ElevatedButton(
+                    //               onPressed: () {
+                    //                 Navigator.pop(context);
+                    //               },
+                    //               child: Text('OK'),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       );
+
+                    // }
+                    //
 
                     return null;
                   },
@@ -94,8 +125,9 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 16),
                 TextFormField(
                   style: TextStyle(color: Colors.white),
-                  // controller: _passwordController,
+                  controller: _passwordController,
                   decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
                       border: new OutlineInputBorder(
                         borderSide: new BorderSide(
                             width: 10, color: Colors.lightGreenAccent),
@@ -108,31 +140,31 @@ class LoginScreen extends StatelessWidget {
                   //   }
                   //   return null;
                   // },
-                  validator: (value) {
-                    if (value!.isEmpty) {
+                  validator: (passwordController) {
+                    if (passwordController!.isEmpty) {
                       return 'Please enter your password';
-                    } else if (value != _validPassword) {
-                       return 'Incorrect password';
-                        }
-                    else{
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text('Incorrect Credentials'),
-                          content: Text(
-                              'Please enter correct username.'),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text('OK'),
-                            ),
-                          ],
-                        ),
-                      );
                     }
-
+                    // else if (passwordController != _validPassword) {
+                    //    return 'Incorrect password';
+                    //     }
+                    // else{
+                    //   showDialog(
+                    //     context: context,
+                    //     builder: (context) => AlertDialog(
+                    //       title: Text('Incorrect Credentials'),
+                    //       content: Text(
+                    //           'Please enter correct username.'),
+                    //       actions: [
+                    //         ElevatedButton(
+                    //           onPressed: () {
+                    //             Navigator.pop(context);
+                    //           },
+                    //           child: Text('OK'),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   );
+                    // }
 
                     return null;
                   },
@@ -147,18 +179,19 @@ class LoginScreen extends StatelessWidget {
                     // );
 
                     if (_formKey.currentState!.validate()) {
-                      // If the form is valid, navigate to the next page
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
+                      login(context);
+
+                      // Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => HomePage()),
+                      // );
                     }
                   },
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   child: Text(
                     'LOGIN',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    style: TextStyle(fontSize: 25, color: Colors.black),
                   ),
                 ),
               ],
