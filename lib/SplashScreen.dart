@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'LoginScreen.dart';
+import 'loginscreen.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
